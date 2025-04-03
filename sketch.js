@@ -9,12 +9,11 @@ let isConnected = false;
 let bluetoothStatus = "Disconnected";
 
 let recognition;
-let transcript = ""; // 음성 인식 결과
-let recognitionStatus = "🕹️ 음성 인식을 시작하려면 버튼을 누르세요."; // 상태 안내 문구
-let feedbackEmoji = ""; // 이모지 피드백
-let sentData = ""; // 마이크로비트로 전송된 데이터
+let transcript = ""; 
+let recognitionStatus = "🕹️ 음성 인식을 시작하려면 버튼을 누르세요."; 
+let feedbackEmoji = ""; 
+let sentData = ""; 
 
-// 음성 명령과 전송 데이터 매핑
 const voiceCommands = {
   forward: ["전진", "앞으로", "직진", "출발"],
   backward: ["뒤로", "후진"],
@@ -24,34 +23,29 @@ const voiceCommands = {
   ring: ["사이렌", "소리", "부저", "경보음"]
 };
 
-let userCommands = {}; // 사용자가 추가한 명령어를 저장하는 객체
+let userCommands = {}; 
 
 function setup() {
-  console.log("Setup function called"); // 디버깅용 로그
+  console.log("Setup function called"); 
   const canvas = createCanvas(30, 30);
   canvas.parent("p5-container");
 
-  // STEP1: 블루투스 연결
   createBluetoothUI();
 
-  // STEP2: 음성 인식 데이터 표
   createCommandTable();
 
-  // STEP3: 사용자 명령어 추가 UI
   createUserCommandUI();
 
-  // STEP4: 음성 인식 제어
   createVoiceRecognitionUI();
 
-  // 음성 인식 객체 초기화
   setupVoiceRecognition();
 }
 
 /**
- * STEP1: 블루투스 연결 UI 생성
+ 블루투스 연결 UI 생성
  */
 function createBluetoothUI() {
-  console.log("Creating Bluetooth UI"); // 디버깅용 로그
+  console.log("Creating Bluetooth UI"); 
   const statusElement = select("#bluetoothStatus");
   if (statusElement) {
     statusElement.html(`상태: ${bluetoothStatus}`);
@@ -70,10 +64,10 @@ function createBluetoothUI() {
 }
 
 /**
- * STEP2: 음성 인식 데이터 표 생성
+ 음성 인식 데이터 표 생성
  */
 function createCommandTable() {
-  console.log("Creating Command Table"); // 디버깅용 로그
+  console.log("Creating Command Table"); 
   const tableContainer = select("#command-table-container");
   if (tableContainer) {
     const table = createElement("table");
@@ -96,10 +90,10 @@ function createCommandTable() {
 }
 
 /**
- * STEP3: 사용자 명령어 추가 UI
+사용자 명령어 추가 UI
  */
 function createUserCommandUI() {
-  console.log("Creating User Command UI"); // 디버깅용 로그
+  console.log("Creating User Command UI"); 
   const inputContainer = select("#user-command-ui");
   if (inputContainer) {
     const commandInput = createInput().attribute("placeholder", "새로운 음성 명령");
@@ -155,10 +149,10 @@ function updateCommandTable() {
 }
 
 /**
- * STEP4: 음성 인식 제어 UI 생성
+음성 인식 제어 UI 생성
  */
 function createVoiceRecognitionUI() {
-  console.log("Creating Voice Recognition UI"); // 디버깅용 로그
+  console.log("Creating Voice Recognition UI"); 
   const buttonContainer = select("#voice-recognition-ui");
   if (buttonContainer) {
     const startButton = createButton("🟢 음성 인식 시작").addClass("start-button");
@@ -375,5 +369,4 @@ function draw() {
   background(220);
 }
 
-// 디버깅용: 모든 함수가 호출되는지 확인
 console.log("Script loaded and running");
